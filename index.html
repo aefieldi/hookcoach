@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hook Coach Setup</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column; numbered setup steps as a vertical track, prompts in mono "paste boxes", resources at the end. */
+:root{ color-scheme:light;
+  --bg:#f7f5fc; --surface:#ffffff; --fg:#231c38; --muted:#6a6283; --line:#e3ddf1;
+  --accent:#6b46d9; --accent-soft:#ece6fd; --mint:#1f8f72; --mint-soft:#dff5ec; --code-bg:#f2eefb;
+  --display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --body:"Figtree", "Helvetica Neue", system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#15111f; --surface:#1e1830; --fg:#ece8f7; --muted:#a79fc0; --line:#332a4a;
+  --accent:#a98bff; --accent-soft:#2c2246; --mint:#6fdcb9; --mint-soft:#173a30; --code-bg:#191427; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#15111f; --surface:#1e1830; --fg:#ece8f7; --muted:#a79fc0; --line:#332a4a;
+  --accent:#a98bff; --accent-soft:#2c2246; --mint:#6fdcb9; --mint-soft:#173a30; --code-bg:#191427; color-scheme:dark }
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 var(--body)}
+.wrap{max-width:720px;margin:0 auto;padding-block:48px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:40px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(2.2rem,6vw,3.2rem);font-weight:700;letter-spacing:-.02em}
+h2{font-size:1.45rem;font-weight:700}
+h3{font-size:1.1rem;font-weight:600}
+p{margin:0}
+.eyebrow{font:500 .75rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+header{display:flex;flex-direction:column;gap:14px}
+.lede{font-size:1.15rem;color:var(--muted);max-width:60ch}
+.loop{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font:500 .85rem var(--mono)}
+.loop span{background:var(--accent-soft);color:var(--accent);padding:6px 12px;border-radius:999px}
+.loop i{font-style:normal;color:var(--muted)}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0;counter-reset:s}
+.step{position:relative;padding:0 0 36px 56px;counter-increment:s}
+.step::before{content:counter(s);position:absolute;left:0;top:-2px;width:36px;height:36px;border-radius:50%;background:var(--accent);color:var(--surface);font:700 1rem/36px var(--display);text-align:center}
+.step::after{content:"";position:absolute;left:17px;top:40px;bottom:4px;width:2px;background:var(--line)}
+.step:last-child::after{display:none}
+.step-body{display:flex;flex-direction:column;gap:12px;min-width:0}
+.step-body ul,.step-body ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.muted{color:var(--muted)}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:0}
+.box-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.box-head b{font:500 .8rem var(--mono);color:var(--muted);letter-spacing:.04em}
+pre{margin:0;padding:16px;background:var(--code-bg);font:400 .86rem/1.6 var(--mono);white-space:pre-wrap;word-wrap:break-word;overflow-x:auto}
+button.copy{font:600 .9rem var(--body);background:var(--accent);color:var(--surface);border:0;border-radius:8px;padding:8px 16px;cursor:pointer}
+button.copy.big{font-size:1rem;padding:12px 20px}
+button.copy.done{background:var(--mint)}
+button.copy:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-size:.82rem;border:1px solid var(--line);border-radius:999px;padding:3px 10px;color:var(--muted);background:var(--surface)}
+details{border-top:1px solid var(--line)}
+summary{padding:10px 14px;cursor:pointer;font-weight:600;color:var(--accent)}
+details pre{max-height:360px;overflow:auto}
+.tip{background:var(--mint-soft);color:var(--fg);border-radius:10px;padding:12px 14px;font-size:.95rem}
+.tip strong{color:var(--mint)}
+.section{display:flex;flex-direction:column;gap:14px}
+.res{display:flex;flex-direction:column;gap:10px}
+.res a{display:flex;flex-direction:column;gap:2px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--fg);text-decoration:none}
+.res a:hover{border-color:var(--accent)}
+.res a b{font-family:var(--display);font-size:1.05rem;color:var(--accent)}
+.res a span{color:var(--muted);font-size:.93rem}
+textarea.hidden-src{position:absolute;left:-9999px;width:1px;height:1px}
+@media (max-width:480px){.step{padding-left:48px}.step::before{width:32px;height:32px;line-height:32px}.step::after{left:15px}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header>
+  <p class="eyebrow">Hook Library · Claude Project setup</p>
+  <h1>Hook Coach</h1>
+  <p class="lede">The hooks are the easy part. This is what you do with them: talk for one minute, paste it into Claude, and get back a video you can film today.</p>
+  <div class="loop" aria-label="The loop"><span>1-min brain dump</span><i>→</i><span>Hook Coach</span><i>→</i><span>hook + beats + CTA</span><i>→</i><span>film it</span></div>
+</header>
+
+<section class="section">
+  <h2>Set it up once (10 minutes)</h2>
+  <ol class="steps">
+    <li class="step"><div class="step-body">
+      <h3>Make a Project called Hook Coach</h3>
+      <p>In Claude, open <b>Projects</b> and click <b>Create project</b>. Name it <b>Hook Coach</b>.</p>
+    </div></li>
+
+    <li class="step"><div class="step-body">
+      <h3>Add the whole Hook Library to the Project knowledge</h3>
+      <p>Copy it below. In your Project, click <b>+</b> next to Project knowledge, choose <b>Add text content</b>, title it <b>Hook Library</b> and paste.</p>
+      <div class="box">
+        <div class="box-head"><b>THE HOOK LIBRARY · 242 HOOKS, FORMULAS AND RULES</b><button class="copy big" data-src="lib">Copy the whole Hook Library</button></div>
+        <div style="padding:12px 14px" class="chips"><span>How a hook works</span><span>Verbal hooks (the first sentence out of your mouth)</span><span>Mid-sentence re-hooks</span><span>Title hooks (the text on screen)</span><span>Title frameworks (built for YouTube, they work anywhere)</span></div>
+        <details><summary>Preview what's inside</summary><pre id="lib-preview"></pre></details>
+      </div>
+      <p class="tip"><strong>Why knowledge and not instructions?</strong> The library is long. In the knowledge it's a reference Claude reads every time. The instructions stay short, so Claude follows them.</p>
+    </div></li>
+
+    <li class="step"><div class="step-body">
+      <h3>Paste these Project instructions</h3>
+      <p>Click <b>Set project instructions</b> (or the pencil next to Instructions), paste this and save.</p>
+      <div class="box">
+        <div class="box-head"><b>PROJECT INSTRUCTIONS</b><button class="copy" data-src="instr">Copy</button></div>
+        <pre id="instr">You are my short-form video coach. The "Hook Library" in this project's knowledge holds every hook I use.
+
+When I paste a brain dump (a transcript of me talking about something for about a minute), turn it into ONE 45 to 60 second video:
+
+1. The one point worth a video. Quote my best line from the dump word for word.
+2. Three opening hooks, each from a DIFFERENT list in the Hook Library (name the list). Keep each hook exactly as written and only fill in my topic. Star the one you'd pick.
+3. On-screen text for the first 3 seconds, 6 words max, and different from the spoken hook.
+4. 3 to 4 beats as bullets, in my own words from the dump. No new ideas.
+5. One re-hook from the re-hook list, placed between beat 2 and beat 3.
+6. CTA: "Comment [WORD] and I'll send it." Suggest the word.
+7. A 2-line caption that ends with the CTA.
+
+Rules:
+- Don't invent results, numbers, clients or stories I didn't say.
+- Keep my phrasing. If a line sounds like a coach wrote it, use mine instead.
+- Give me bullets I can glance at while filming, not a script to memorize.
+- If my brain dump is longer than 3 minutes, ask me first: one video, or a week of videos?</pre>
+      </div>
+    </div></li>
+
+    <li class="step"><div class="step-body">
+      <h3>Brain dump for one minute</h3>
+      <p>Pick one thing you keep explaining to clients, one thing you disagree with, or one thing that happened this week. Talk to your phone for a minute. Don't plan it.</p>
+      <p class="muted">Get the transcript from a voice memo, a Loom, a TikTok draft or any transcription app, then paste it into a new chat inside Hook Coach. That's the whole prompt.</p>
+    </div></li>
+
+    <li class="step"><div class="step-body">
+      <h3>Film it the same day</h3>
+      <p>Use the starred hook, glance at the beats, say the re-hook mid-sentence and end on the CTA. Don't love the hook? Reply "give me 3 more from other lists" and pick again.</p>
+    </div></li>
+  </ol>
+</section>
+
+<section class="section">
+  <h2>Bonus: one long dump, a week of videos</h2>
+  <p>Talk for five minutes instead of one, then paste this into a new Hook Coach chat with your transcript under it.</p>
+  <div class="box">
+    <div class="box-head"><b>WEEK OF VIDEOS PROMPT</b><button class="copy" data-src="week">Copy</button></div>
+    <pre id="week">Here's a 5-minute brain dump. Find every separate video idea in it (max 5).
+
+For each one give me:
+- The question my audience would actually type or ask, in plain words
+- One hook from the Hook Library, filled in with my topic (name the list)
+- 3 beats in my words from the dump
+- Whether it's a teaching, story or authority video
+
+Then rank them in the order I should film them, with one line on why for each. Don't invent anything I didn't say.
+
+My brain dump:
+[paste transcript]</pre>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Want more structure?</h2>
+  <div class="res">
+    <a href="https://aefieldi.github.io/soulalignedshortform/" target="_blank" rel="noopener">
+      <b>Soul-Aligned Short-Form Script Studio ↗</b>
+      <span>Brain dump in, a fuller script out, for TikToks and Reels. Use it when you want more than bullets.</span>
+    </a>
+    <a href="https://aefieldi.github.io/hooks/" target="_blank" rel="noopener">
+      <b>The Hook Library ↗</b>
+      <span>The same hooks, searchable, every line tap-to-copy. Good for picking a hook by hand.</span>
+    </a>
+  </div>
+</section>
+</div>
+
+<textarea class="hidden-src" id="lib" readonly aria-hidden="true" tabindex="-1">The Hook Library. Hooks are formats: swap the brackets and blanks for your topic, keep the rest as written. Sources are named under each list.
+
+---
+
+# The Hook Library
+
+## Part 1. How a hook works
+
+**Five rules that sit under every list.**
+
+1. Say something different from what&#x27;s on screen. The title hook is the text, the verbal hook is the first sentence out of your mouth. If they match, the viewer reads it, hears it, and leaves. Eye and ear each get a reason to stay.
+2. Title hook: under 5 words, one word in CAPS, an emoji if it fits. Top or middle of the frame so the caption doesn&#x27;t cover it. Dates and numbers create urgency.
+3. Re-hook at 3 to 5 seconds, without pausing. Mid-sentence, as if you forgot to finish the thought. It re-earns the attention the hook bought.
+4. Every hook triggers one of three feelings: curiosity (I need to know), fear (I don&#x27;t want to get this wrong), desire (I want that). The best ones hit two.
+5. The McDonald&#x27;s test. Someone who works at McDonald&#x27;s should understand your hook instantly. No jargon, no setup, no &quot;in this video I&#x27;m going to&quot;.
+
+**The ten principles behind every framework.**
+
+- Curiosity: an open loop they need closed (&quot;what happens to…&quot;, &quot;do X really…&quot;)
+- Desire: what they want (clients, money, freedom, being seen)
+- Negativity: warnings and problems grab faster than benefits
+- Controversy: a counterintuitive or polarising take
+- Authority: a name, a credential, a number of clients
+- Specificity: numbers, timeframes, exact examples feel real
+- Lists: &quot;4 leaks&quot;, &quot;5 signs&quot;, &quot;3 moves&quot; feel scannable
+- Constraint: &quot;the ONE thing&quot;, &quot;this ONE mistake&quot;
+- Contrast: &quot;not X, but Y&quot;, &quot;same gift, different income&quot;
+- Speed or ease: &quot;in 30 minutes&quot;, &quot;in one sitting&quot;, &quot;without posting daily&quot;
+
+**Dial it to 11, then pull back one notch.** Start: &quot;Your tiers are priced wrong.&quot; Up: &quot;Why nobody upgrades in your community.&quot; Up: &quot;The #1 reason nobody upgrades.&quot; Up: &quot;This pricing mistake is killing your upgrades.&quot; Too far: &quot;Your pricing is a crime scene.&quot; Pull back one.
+
+**Universalise, or narrow on purpose.** &quot;Five pricing myths every astrologer believes&quot; filters the audience; &quot;Five pricing myths&quot; is universal. Every word after the hook is a filter. Narrow only when the callout IS the strategy (a rising sign, a Human Design type), because the right person self-identifies hard.
+
+## Part 2. Verbal hooks (the first sentence out of your mouth)
+
+Pick a pattern, say it in your words, never the same pattern two days in a row.
+
+### Educational (26)
+Source: the Fire Your Boss hook list.
+
+- Let me show you my favorite way to [X].
+- If I had just [limited] minutes every day to work towards [core desire], here&#x27;s exactly what I&#x27;d do.
+- Here is a beginner-friendly way to [achieve core desire].
+- Here are more creative ways for you to [achieve core desire].
+- Things I had to unlearn in order to [achieve result].
+- It&#x27;s time to start talking about something a lot of you don&#x27;t want to talk about, and that&#x27;s [X].
+- The mindset behind a successful [niche role] vs. an unsuccessful one comes down to this…
+- If you are currently in the process of [niche journey], listen up, this video is for you.
+- Give me 1 minute and I&#x27;ll show you how to [X].
+- 5 [niche] hacks.
+- The biggest missing link with your [niche journey] is…
+- Is [strategy] a viable way to achieve [goal]? Let&#x27;s talk about it.
+- 3 [niche] strategies.
+- Here are 4 ways that you can [achieve X].
+- In case you didn&#x27;t know, [shocking niche fact].
+- This is probably why you&#x27;re unable to [X]…
+- One of the most important things to remember in regards to [niche] is…
+- Here is what to do if you [confusing scenario your audience runs into].
+- Ok, hear me out. [Uncommon or new strategy in your niche.]
+- Without these 3 things, I probably would&#x27;ve never been able to [achieve audience desire].
+- Here&#x27;s exactly what I&#x27;d do if I wanted to [achieve specific result].
+- If I wanted to achieve [desired result] in 1 month, here&#x27;s what I would do.
+- I&#x27;m going to give you the simplest way to achieve [result].
+- If you do X things, you&#x27;ll have Y result by Z time frame.
+- If you want [specific desire], do these few things.
+- [X] started [X] when… (my clients started booking from their reels when…)
+
+### Storytelling, relatable, inspirational (31)
+Source: the Fire Your Boss hook list.
+
+- Imagine having [X result] and now you get to [X]. Here&#x27;s how.
+- So I don&#x27;t think enough people know that you can actually get [X result] without doing [X].
+- I dare you to imagine what life would be like when [X] happens. Okay, now let me show you how easy it can be.
+- Your future [bank account / calendar / community] will thank you if you start doing this.
+- Here&#x27;s what no one else is going to tell you about [niche].
+- I&#x27;m never going to stop talking about…
+- Can I vent for a second?
+- They&#x27;ll tell you that [thing you disagree with] matters. When in reality, it&#x27;s all about [thing you stand by].
+- I wish someone had told me [this] before [doing this].
+- You want to know what… [rant]
+- Do you ever wonder what it would be like if you had just…
+- Did you know that you could…
+- I don&#x27;t know who needs to hear this but…
+- So, what is the difference between [X] and [Y]?
+- The most common misconception when it comes to [niche] is…
+- I don&#x27;t think you understand the importance of [key niche strategy].
+- I&#x27;m finally starting to realize that [realization]…
+- I have a confession to make…
+- Hate to break it to you but…
+- Are you interested in learning [X]?
+- What&#x27;s wrong with [something you disagree with in your industry]? I&#x27;ll tell you.
+- I want you to think about this [perspective change].
+- Why does no one talk about…
+- [X] won&#x27;t help you [achieve Y]… instead it will…
+- If you&#x27;ve ever wondered how [niche phenomenon] works, let&#x27;s talk about it. I&#x27;m a [your title]…
+- Have you ever wondered…
+- More people need to know about…
+- [X] will always beat out [Y]. (A content strategy will always beat posting and praying.)
+- You should not watch this video unless you care about…
+- Is anyone else annoyed at [harmful myth or belief in your niche]?
+- Put down whatever you&#x27;re doing and let this sink in: [mic drop wisdom].
+
+### Authority (21)
+Source: the Fire Your Boss hook list.
+
+- I&#x27;ve been using this to [achieve result] myself. And I&#x27;ve helped [client] [achieve result].
+- If you think it&#x27;s gonna take you years to get [X result], think again. I&#x27;m going to teach you how in as little as [X time], just like my client did.
+- After working with over [number] clients solving [X problem], I need you to know this is the #1 thing that is overlooked.
+- Here&#x27;s proof that you don&#x27;t need [X] to get [X result]. (Then share the client who got it.)
+- For over [X] years I&#x27;ve been helping people [describe expertise].
+- After [X years] of helping people [solve problem]…
+- If you were my client and you were having [X problem], this is what I would tell you to do.
+- My client got [X result] and I&#x27;m going to show you exactly how.
+- This is exactly how I solved [X problem].
+- This is my go-to strategy for doing [X].
+- My client got [X result] without doing [the 3 things your audience thinks it takes].
+- Here&#x27;s a [niche] tip that completely changed my life. And I hope it does the same for you.
+- If I had to start all over as [X], this is the first thing I would do.
+- Okay, I&#x27;m gonna tell you how I managed to get [outcome].
+- I tell all of my clients to [X] if they want [X].
+- How I achieved [X] by stopping [X].
+- I&#x27;m [your name] and I wanna talk about…
+- Something I do every [day / week / month] that helps me [X] is [X].
+- If I could follow just ONE [niche] rule it would be…
+- Let&#x27;s dive into the science of how I get you [X result].
+- [X] started [X] when… (my clients started making sales from their reels when…)
+
+### Rachel Pedersen&#x27;s 20 viral info hooks
+Source: Rachel Pedersen, from 937 viral info TikToks.
+
+- The best [technique] I&#x27;ve ever done.
+- 10 [tool types] I wish I knew earlier.
+- You need this free tool for [vehicle].
+- I wish I knew about this [vehicle] tip sooner.
+- Top 5 sites I use to save time as a [niche].
+- Nobody is talking about this [vehicle] strategy.
+- This is why your [vehicle] isn&#x27;t working.
+- There&#x27;s one tiny hack that creates exponential results.
+- 4 free sites to create great [tool types].
+- Simple way to do [vehicle] for free.
+- Want to know how to do the [technique]?
+- How to grow your [vehicle] organically.
+- 5 things you can do right now to improve [vehicle].
+- This is your sign to start taking your [vehicle] seriously.
+- How to grow your [vehicle].
+- Here are 10 ideas you can use for [vehicle].
+- I just found the best [technique] hack.
+- [Vehicle] hack that you didn&#x27;t know about.
+- I decided to take my [vehicle] seriously 2 months ago.
+- 3 apps every [niche] uses.
+
+### The &quot;first 5&quot; format
+Source: Shannon McKinstrie&#x27;s reel, examples as written. The first line is the format.
+
+- The first 5 things I&#x27;d [do / change / teach] if you [situation]
+- The first 5 things I&#x27;d change in your builder-grade kitchen if you&#x27;d let me
+- The first 5 Sephora products I&#x27;d add to your cart if you only have five minutes to get ready
+- The 5 lunches I&#x27;d add to your weekly rotation if you wanted to lose 15 lbs by Thanksgiving
+- The first five neighborhoods in Raleigh I&#x27;d take you if you were thinking of relocating here
+- The first five things I&#x27;d teach you if you were brand-new to golf
+- The first 5 things I&#x27;d teach your dog if you just brought home a new puppy
+- The first 5 things I&#x27;d have you try from our fall menu if you love sweet treats
+- The first five books I&#x27;d recommend to your tween if they say they hate reading
+- The first 5 things I&#x27;d take off your plate if you hired me as your VA
+- The first five investments I&#x27;d have you make if you were starting with $500
+
+## Part 3. Mid-sentence re-hooks
+
+Say one of these 3 to 5 seconds in, without pausing, as if you forgot to finish the thought. Fill the blanks with that day&#x27;s topic. Source: Shannon McKinstrie&#x27;s &quot;10 mid-sentence hooks to start your talk-to-camera videos&quot;, word for word.
+
+- …just kidding, I&#x27;m not done because the thing is…
+- …yes I know it sounds crazy but…
+- …and you know what else?
+- …and don&#x27;t get me wrong because…
+- …speaking of ___ did you hear about ___?
+- …but the thing that actually made the difference surprised me…
+- …and this is where most people get [topic] completely backwards…
+- …so if you&#x27;ve been wondering why [problem] keeps happening, this might be it.
+- …and that is why I&#x27;ll never ___ again…
+- …and if you&#x27;ve been ___ [name situation they&#x27;re in], I want you to hear this.
+
+## Part 4. Title hooks (the text on screen)
+
+**Five rules.**
+
+1. Under 5 words. Short and simple.
+2. One word in CAPS. The keyword, not the whole line.
+3. Say something DIFFERENT out loud than what the title says. If the title is &quot;4 leaks in your business&quot;, the first words out of your mouth are not &quot;here are four leaks&quot;.
+4. Top or middle of the frame. The caption covers the bottom.
+5. Emojis and dates help. &quot;Do this before 11/11&quot; outperforms &quot;Do this&quot;.
+
+### Formulas that work for spiritual business
+Each line is the formula, then an example after the colon.
+
+- [Callout] [emoji] + the gap: &#x27;Libra Rising ♎️ the missing piece&#x27;
+- [Thing] is a SYMPTOM / isn&#x27;t [what they think]: &#x27;Clarity is a SYMPTOM&#x27;, &#x27;Winging it isn&#x27;t INTUITION&#x27;
+- Why [who] [bad outcome]: &#x27;Why nobody UPGRADES&#x27;, &#x27;Why members LEAVE&#x27;
+- [X] ≠ [Y] / [X] vs [Y]: &#x27;Followers ≠ income&#x27;, &#x27;Scripts vs FRAMEWORKS&#x27;
+- Stop [thing] / Stop [thing] NOW: &#x27;Stop selling by the HOUR&#x27;
+- Number + noun: &#x27;4 LEAKS in your business&#x27;, &#x27;3 moves, 90 days&#x27;
+- Inside / BTS: &#x27;Inside a 60-min AUDIT&#x27;, &#x27;Audit prep nobody SEES&#x27;
+- The cost of [inaction]: &#x27;The cost of STAYING&#x27;, &#x27;One more year of this?&#x27;
+- It wasn&#x27;t [what they assume]: &#x27;It wasn&#x27;t HUSTLE&#x27;
+- Contrast on one line: &#x27;Big audience, totally STUCK&#x27;, &#x27;Low views, HIGH sales&#x27;
+- Two short sentences: &#x27;Buy the lamp. Raise the price.&#x27;
+- Same [X]. Different [Y].: &#x27;Same gift. Totally different INCOME.&#x27;
+
+### Manifestation, mindset, spiritual title hooks (30)
+Source: the viral title hooks swipe file.
+
+- Manifest Wealth INSTANTLY
+- Your Energy = Your Bank
+- Reprogram Your Mind FAST
+- Signs Money Is Coming
+- Magnetic Woman ENERGY
+- Advice from a heart-led multi-millionaire
+- This BLOCKS Your Manifestation
+- Speak This = More Money
+- Money Loves This Energy
+- What You Focus On GROWS
+- Shift Your Vibe Fast
+- This Attracts DREAM Clients
+- Stop Doing This Now
+- Upgrade Your Mindset FAST
+- Let Go = Receive More
+- This Changes EVERYTHING
+- Manifest Faster With This
+- Overcome Self-Doubt in 3 Steps
+- Mindset Shifts for SUCCESS
+- Break Free from Limiting Beliefs
+- Unlock Your Full Potential
+- Connect with Your Higher Self
+- Understanding Your Spirit Guides
+- Embrace Your Spiritual Awakening
+- Full Moon Rituals for Releasing
+- Stop Doing THIS to Your Business
+- The Real Reason Your Offer Isn&#x27;t Selling
+- Your Pricing Is RUINING Your Upgrades
+- The Secret Nobody Talks About
+- I Stopped Doing THIS &amp; Everything Changed
+
+## Part 5. Title frameworks (built for YouTube, they work anywhere)
+
+These came from YouTube titles, and the same frameworks work for a reel title, a carousel cover, a post headline or an ad. Match the piece to the framework that amplifies it, generate ten, keep the strongest three, then pair each with a thumbnail that says something else.
+
+**Seven rules.**
+
+1. Front-load the search keyword in the first 3 to 5 words.
+2. 7 to 11 words, under 55 characters. Mobile truncates after that, and 70% of views are mobile.
+3. Use the exact phrase they&#x27;d type at 11pm when they&#x27;re stuck.
+4. One power word per title. Capitalise at most one word.
+5. A bracket adds a second promise: (Step by Step), (Without Burnout), (For Readers).
+6. Label each title Search (they typed it) or Browse (they scrolled into it). Make some of each.
+7. No year unless it&#x27;s genuinely time-sensitive. Evergreen compounds. No clickbait, no em dashes, no salesy words.
+
+**Title and thumbnail never say the same thing.** Title &quot;Five pricing myths&quot; with thumbnail &quot;Five pricing myths&quot; repeats. Title &quot;Five pricing myths&quot; with thumbnail &quot;You&#x27;re doing it wrong&quot; complements. Title asks, thumbnail hints. Title promises, thumbnail adds urgency. Title states the problem, thumbnail shows the feeling.
+
+Sources: the viral-youtube-titles formula library, Creator Hooks (Jake Thomas) frameworks ranked by hook score, Andrew Muto&#x27;s universalise, dial-to-11 and McDonald&#x27;s test.
+
+### Outcome-based (desire)
+
+- How to [achieve outcome] without [undesirable thing]
+- [Search term]: The [method] That Actually Works
+- How I [achieved result] in [timeframe] (and How You Can Too)
+- The Laziest Way to [achieve outcome] as a [niche role]
+- [Search term]: My Exact [number]-Step Method
+- From [starting point] to [result] Using [specific method]
+- What [dream outcome] Actually Looks Like for [niche role]
+- Give Me [short timeframe] and I Will Make Your [thing] [percentage] Better
+
+### Contrarian / pattern interrupt (curiosity + fear)
+
+- Stop [common advice]. Do This Instead for [outcome]
+- Why [common belief] Is Keeping You [stuck / overwhelmed]
+- [Niche thing] Is Not Hard. You Are Just Doing It Wrong.
+- I Quit [expected thing] and [unexpected result] Happened
+- [Common advice] Is BS (for [specific audience])
+- You Do Not [x]. You Want [y].
+- Why [unexpected thing] Is Not Enough
+
+### Timeframe / speed (desire + curiosity)
+
+- [Search term] in [short timeframe] (Step by Step)
+- [Number] Minutes of No-BS [Niche] Advice
+- How to [outcome] in [timeframe] Even If You Are Starting from Zero
+- Give Me [timeframe] and You Will Never [bad thing] Again
+- I [bold action] for [timeframe]. This Is What Happened.
+
+### Authority / proof (desire + curiosity)
+
+- How [authority type] [achieve result] (and You Can Copy Them)
+- I [did massive thing]. Here Is What Actually Works.
+- [Number] Things [successful people] Do That You Do Not
+- I Helped [number] [clients] [achieve result]. Here Is the Pattern.
+- I Studied [number] [niche thing]. This Is What Will [achieve result].
+
+### Secrets / insider (curiosity)
+
+- [Search term]: [Number] Secrets That Feel Like Cheating
+- What Nobody Tells You About [niche thing]
+- The [method] That Gives You an Unfair Advantage in [niche]
+- The [niche] Strategy Nobody Is Talking About
+
+### Mistakes / avoidance (fear)
+
+- [Number] [Niche] Mistakes That Are Costing You [clients / money / time]
+- Do Not [do thing] Until You Watch This
+- Why You Are Not Getting [desired result] (It Is Not What You Think)
+- This ONE Mistake Is Killing Your [niche thing]
+- [Number] [Good] Habits That Are Actually Keeping You [stuck]
+
+### Transformation / journey (desire + curiosity)
+
+- I Tried [new approach] for [timeframe]. Here Is What Happened.
+- From [undesirable state] to [desirable state] Using [method]
+- I Changed ONE Thing and [dramatic result]
+- How I Went from [starting point] to [current result]
+- So You Have [taken action]. Here Is How to [continue].
+
+### Curiosity gap / open loop (curiosity)
+
+- This Is All It Takes to [achieve outcome]
+- The [niche] Advice That Rewired My Brain
+- I Was Wrong About [thing]. Here Is What I Learned.
+- The Ugly Truth About [niche thing] Nobody Wants to Hear
+- This [simple thing] Will [transform outcome] (Most [niche people] Miss It)
+
+### Creator Hooks top performers (highest hook scores)
+
+- I tested [X] vs [Y]. Here&#x27;s what won.
+- Getting [addicted to / obsessed with] [X] is easy. (contradiction)
+- How to [achieve goal] without [unwanted action]
+- NEVER say this [on a sales call / in a DM]…
+- What happens to [X] that never [Y]?
+- Is there a difference between [X] and [Y]?
+- The REALITY of [polarizing thing] in [current year]
+- 5 [X] habits that [Y]
+- I went to all [X]. Here are my rankings.
+- From [screw-up] to [legend]: [the turning point]
+
+</textarea>
+
+<script>
+(function(){
+  var lib=document.getElementById('lib');
+  document.getElementById('lib-preview').textContent=lib.value;
+  function text(id){var el=document.getElementById(id);return el.value!==undefined&&el.tagName==='TEXTAREA'?el.value:el.textContent;}
+  function fallback(id){
+    var el=document.getElementById(id==='lib'?'lib-preview':id);
+    if(id==='lib'){el.closest('details').open=true;}
+    var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);
+  }
+  document.querySelectorAll('button.copy').forEach(function(b){
+    var label=b.textContent;
+    b.addEventListener('click',function(){
+      var id=b.getAttribute('data-src');
+      var done=function(){b.textContent='Copied';b.classList.add('done');setTimeout(function(){b.textContent=label;b.classList.remove('done')},1800)};
+      try{navigator.clipboard.writeText(text(id)).then(done,function(){fallback(id);b.textContent='Selected, press Copy';});}
+      catch(e){fallback(id);b.textContent='Selected, press Copy';}
+    });
+  });
+})();
+</script>
+</body>
+</html>
