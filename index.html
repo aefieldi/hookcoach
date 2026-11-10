@@ -3,106 +3,157 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0a12">
 <title>Hook Coach Setup</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
 <style>
-/* Layout: one reading column; numbered setup steps as a vertical track, prompts in mono "paste boxes", resources at the end. */
-:root{ color-scheme:light;
-  --bg:#f7f5fc; --surface:#ffffff; --fg:#231c38; --muted:#6a6283; --line:#e3ddf1;
-  --accent:#6b46d9; --accent-soft:#ece6fd; --mint:#1f8f72; --mint-soft:#dff5ec; --code-bg:#f2eefb;
-  --display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
-  --body:"Figtree", "Helvetica Neue", system-ui, sans-serif;
-  --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+/* Layout: one dark holographic column. Hero with a drifting aurora + sparkles, the 4-step loop as emoji pills on an animated thread, five step cards with a big glyph each, prompts tucked behind "Show the prompt". Single dark theme by choice: it's her brand. */
+:root{
+  --bg:#0b0a12; --card:#13111d; --card2:#181427; --line:rgba(183,156,245,.18);
+  --text:#fff; --muted:rgba(255,255,255,.66); --dim:rgba(255,255,255,.42);
+  --lav:#b79cf5; --violet:#7c5cf0; --mint:#7fe0b8; --gold:#e8c878; --pink:#f2a7e2;
+  --display:'Outfit',system-ui,sans-serif; --serif:'Instrument Serif',Georgia,serif;
+  color-scheme:dark;
 }
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
-  --bg:#15111f; --surface:#1e1830; --fg:#ece8f7; --muted:#a79fc0; --line:#332a4a;
-  --accent:#a98bff; --accent-soft:#2c2246; --mint:#6fdcb9; --mint-soft:#173a30; --code-bg:#191427; color-scheme:dark }}
-:root[data-theme="dark"]{
-  --bg:#15111f; --surface:#1e1830; --fg:#ece8f7; --muted:#a79fc0; --line:#332a4a;
-  --accent:#a98bff; --accent-soft:#2c2246; --mint:#6fdcb9; --mint-soft:#173a30; --code-bg:#191427; color-scheme:dark }
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 var(--body)}
-.wrap{max-width:720px;margin:0 auto;padding-block:48px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:40px}
-h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
-h1{font-size:clamp(2.2rem,6vw,3.2rem);font-weight:700;letter-spacing:-.02em}
-h2{font-size:1.45rem;font-weight:700}
-h3{font-size:1.1rem;font-weight:600}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 var(--display);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:720px;margin:0 auto;padding-block:40px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:44px;position:relative}
+h1,h2,h3{margin:0;line-height:1.1;text-wrap:balance;font-weight:600}
+h1{font-size:clamp(2.4rem,7vw,3.6rem);letter-spacing:-.02em}
+h2{font-size:1.5rem}
+h3{font-size:1.15rem}
+em.s{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--lav)}
 p{margin:0}
-.eyebrow{font:500 .75rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
-header{display:flex;flex-direction:column;gap:14px}
-.lede{font-size:1.15rem;color:var(--muted);max-width:60ch}
-.loop{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font:500 .85rem var(--mono)}
-.loop span{background:var(--accent-soft);color:var(--accent);padding:6px 12px;border-radius:999px}
-.loop i{font-style:normal;color:var(--muted)}
-.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0;counter-reset:s}
-.step{position:relative;padding:0 0 36px 56px;counter-increment:s}
-.step::before{content:counter(s);position:absolute;left:0;top:-2px;width:36px;height:36px;border-radius:50%;background:var(--accent);color:var(--surface);font:700 1rem/36px var(--display);text-align:center}
-.step::after{content:"";position:absolute;left:17px;top:40px;bottom:4px;width:2px;background:var(--line)}
-.step:last-child::after{display:none}
-.step-body{display:flex;flex-direction:column;gap:12px;min-width:0}
-.step-body ul,.step-body ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
 .muted{color:var(--muted)}
-.box{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:0}
-.box-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
-.box-head b{font:500 .8rem var(--mono);color:var(--muted);letter-spacing:.04em}
-pre{margin:0;padding:16px;background:var(--code-bg);font:400 .86rem/1.6 var(--mono);white-space:pre-wrap;word-wrap:break-word;overflow-x:auto}
-button.copy{font:600 .9rem var(--body);background:var(--accent);color:var(--surface);border:0;border-radius:8px;padding:8px 16px;cursor:pointer}
-button.copy.big{font-size:1rem;padding:12px 20px}
-button.copy.done{background:var(--mint)}
-button.copy:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.eyebrow{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--lav);font-weight:600}
+
+/* aurora + sparkles */
+.aurora{position:absolute;inset:-120px -40% auto;height:520px;pointer-events:none;z-index:-1;filter:blur(60px);opacity:.75}
+.aurora i{position:absolute;border-radius:50%;animation:drift 18s ease-in-out infinite alternate}
+.aurora i:nth-child(1){width:420px;height:420px;left:5%;top:40px;background:radial-gradient(circle,rgba(124,92,240,.75),transparent 65%)}
+.aurora i:nth-child(2){width:360px;height:360px;right:8%;top:0;background:radial-gradient(circle,rgba(127,224,184,.5),transparent 65%);animation-delay:-6s}
+.aurora i:nth-child(3){width:300px;height:300px;left:40%;top:160px;background:radial-gradient(circle,rgba(242,167,226,.45),transparent 65%);animation-delay:-11s}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(40px,30px) scale(1.12)}}
+.sparks{position:absolute;inset:0;pointer-events:none;z-index:0}
+.sparks span{position:absolute;color:var(--gold);font-size:14px;animation:twinkle 3.2s ease-in-out infinite;opacity:0}
+.sparks span:nth-child(2n){color:var(--mint);font-size:10px}
+.sparks span:nth-child(3n){color:var(--pink);font-size:18px}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(.5) rotate(0)}50%{opacity:1;transform:scale(1.1) rotate(25deg)}}
+
+header{position:relative;display:flex;flex-direction:column;gap:16px;padding-top:12px}
+.lede{font-size:1.15rem;max-width:34ch;color:var(--muted)}
+
+/* loop */
+.loop{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
+.loop::before{content:"";position:absolute;left:12%;right:12%;top:30px;border-top:2px dashed rgba(183,156,245,.45);z-index:0;animation:dash 1.4s linear infinite}
+@keyframes dash{to{transform:translateX(-12px)}}
+.loop div{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.loop b{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;font-size:28px;background:var(--card);border:1px solid var(--line);box-shadow:0 0 0 6px var(--bg),0 10px 30px rgba(124,92,240,.25);animation:bob 4s ease-in-out infinite}
+.loop div:nth-child(2) b{animation-delay:-1s}.loop div:nth-child(3) b{animation-delay:-2s}.loop div:nth-child(4) b{animation-delay:-3s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.loop small{font-size:12.5px;color:var(--muted);line-height:1.3}
+
+/* step cards */
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;counter-reset:s}
+.step{counter-increment:s;position:relative;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px 20px 20px;display:grid;grid-template-columns:64px 1fr;gap:16px;overflow:hidden;min-width:0}
+.step::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,92,240,.12),transparent 45%,rgba(127,224,184,.08));pointer-events:none}
+.glyph{width:64px;height:64px;border-radius:18px;display:grid;place-items:center;font-size:32px;background:linear-gradient(145deg,rgba(124,92,240,.45),rgba(183,156,245,.15));border:1px solid var(--line);position:relative}
+.glyph::after{content:"0" counter(s);position:absolute;right:-6px;bottom:-6px;font:600 11px var(--display);letter-spacing:.08em;background:var(--mint);color:#0b0a12;border-radius:999px;padding:2px 7px}
+.body{display:flex;flex-direction:column;gap:10px;min-width:0;position:relative}
+.body p{font-size:15.5px}
+.step h3 em.s{color:var(--gold)}
+
 .chips{display:flex;flex-wrap:wrap;gap:6px}
-.chips span{font-size:.82rem;border:1px solid var(--line);border-radius:999px;padding:3px 10px;color:var(--muted);background:var(--surface)}
-details{border-top:1px solid var(--line)}
-summary{padding:10px 14px;cursor:pointer;font-weight:600;color:var(--accent)}
-details pre{max-height:360px;overflow:auto}
-.tip{background:var(--mint-soft);color:var(--fg);border-radius:10px;padding:12px 14px;font-size:.95rem}
-.tip strong{color:var(--mint)}
-.section{display:flex;flex-direction:column;gap:14px}
-.res{display:flex;flex-direction:column;gap:10px}
-.res a{display:flex;flex-direction:column;gap:2px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--fg);text-decoration:none}
-.res a:hover{border-color:var(--accent)}
-.res a b{font-family:var(--display);font-size:1.05rem;color:var(--accent)}
-.res a span{color:var(--muted);font-size:.93rem}
+.chips span{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;color:var(--muted);background:rgba(255,255,255,.03)}
+
+button.copy{font:600 15px var(--display);background:var(--violet);color:#fff;border:0;border-radius:999px;padding:11px 20px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:0 8px 24px rgba(124,92,240,.35);transition:transform .15s}
+button.copy:hover{transform:translateY(-1px)}
+button.copy.big{font-size:16px;padding:14px 24px;background:linear-gradient(90deg,var(--violet),#a07cf5)}
+button.copy.done{background:var(--mint);color:#0b0a12;box-shadow:none}
+button.copy:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--mint);outline-offset:3px}
+
+details{border:1px solid var(--line);border-radius:14px;background:rgba(0,0,0,.25);min-width:0}
+summary{list-style:none;cursor:pointer;padding:11px 14px;font-weight:600;color:var(--lav);display:flex;justify-content:space-between;align-items:center;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:20px;line-height:1;color:var(--dim)}
+details[open] summary::after{content:"–"}
+.pbar{display:flex;justify-content:flex-end;padding:0 10px 8px}
+pre{margin:0;padding:14px 16px 16px;font:13.5px/1.6 ui-monospace,Menlo,monospace;white-space:pre-wrap;word-wrap:break-word;color:rgba(255,255,255,.88);border-top:1px solid var(--line);max-height:420px;overflow:auto}
+
+.tip{display:flex;gap:10px;align-items:flex-start;background:rgba(127,224,184,.08);border:1px solid rgba(127,224,184,.3);border-radius:14px;padding:11px 14px;font-size:14.5px}
+.tip b{color:var(--mint)}
+
+/* mic illustration */
+.mic{display:flex;align-items:center;gap:14px;margin-top:4px}
+.mic svg{width:84px;height:84px;flex:none}
+.wave{stroke:var(--mint);fill:none;stroke-width:2.5;stroke-linecap:round;opacity:0;animation:wave 2.4s ease-out infinite}
+.wave.w2{animation-delay:.5s}.wave.w3{animation-delay:1s}
+@keyframes wave{0%{opacity:0;transform:scale(.8)}30%{opacity:1}100%{opacity:0;transform:scale(1.25)}}
+.mic .or{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:1.3rem}
+
+.res{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.res a{display:flex;flex-direction:column;gap:6px;padding:18px 16px;border:1px solid var(--line);border-radius:18px;background:var(--card);color:var(--text);text-decoration:none;transition:border-color .2s,transform .2s}
+.res a:hover{border-color:var(--lav);transform:translateY(-2px)}
+.res a i{font-style:normal;font-size:28px}
+.res a b{font-size:1.05rem}
+.res a span{color:var(--muted);font-size:14px}
+.foot{text-align:center;color:var(--dim);font-size:13px;line-height:1.6}
+.foot em{font-family:var(--serif);font-style:italic;color:var(--lav);font-size:1.1rem}
 textarea.hidden-src{position:absolute;left:-9999px;width:1px;height:1px}
-@media (max-width:480px){.step{padding-left:48px}.step::before{width:32px;height:32px;line-height:32px}.step::after{left:15px}}
+
+@media (max-width:520px){
+  .loop{grid-template-columns:repeat(2,1fr);row-gap:18px}
+  .loop::before{display:none}
+  .step{grid-template-columns:1fr;gap:12px}
+  .res{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){.aurora i,.sparks span,.loop::before,.loop b,.wave{animation:none}.sparks span{opacity:.7}.wave{opacity:.6}}
 </style>
 </head>
 <body>
 
 <div class="wrap">
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="sparks" aria-hidden="true">
+  <span style="left:6%;top:30px">✦</span><span style="left:88%;top:60px;animation-delay:.6s">✦</span><span style="left:70%;top:20px;animation-delay:1.3s">✧</span>
+  <span style="left:30%;top:170px;animation-delay:2s">✦</span><span style="left:94%;top:200px;animation-delay:.9s">✦</span><span style="left:12%;top:240px;animation-delay:1.7s">✧</span>
+  <span style="left:55%;top:300px;animation-delay:2.6s">✦</span><span style="left:80%;top:330px;animation-delay:.3s">✧</span>
+</div>
+
 <header>
-  <p class="eyebrow">Hook Library · Claude Project setup</p>
-  <h1>Hook Coach</h1>
-  <p class="lede">The hooks are the easy part. This is what you do with them: talk for one minute, paste it into Claude, and get back a video you can film today.</p>
-  <div class="loop" aria-label="The loop"><span>1-min brain dump</span><i>→</i><span>Hook Coach</span><i>→</i><span>hooks + beats + caption</span><i>→</i><span>film it</span></div>
+  <p class="eyebrow">♎ Hook Coach · for Puffins</p>
+  <h1>Talk for a minute.<br><em class="s">Film it today.</em></h1>
+  <p class="lede">You have the hooks. This is what you do with them: a brain dump in, a video you can film out. ✨</p>
+  <div class="loop" aria-label="The loop">
+    <div><b>🎙️</b><small>1-minute<br>brain dump</small></div>
+    <div><b>✨</b><small>paste it into<br>Hook Coach</small></div>
+    <div><b>🪝</b><small>hooks, beats<br>+ caption</small></div>
+    <div><b>🎬</b><small>film it the<br>same day</small></div>
+  </div>
 </header>
 
-<section class="section">
-  <h2>Set it up once (10 minutes)</h2>
+<section>
   <ol class="steps">
-    <li class="step"><div class="step-body">
-      <h3>Make a Project called Hook Coach</h3>
-      <p>In Claude, open <b>Projects</b> and click <b>Create project</b>. Name it <b>Hook Coach</b>.</p>
+    <li class="step"><div class="glyph">🔮</div><div class="body">
+      <h3>Make a Project called <em class="s">Hook Coach</em></h3>
+      <p class="muted">In Claude: <b>Projects → Create project</b>. Name it Hook Coach. Ten minutes, once.</p>
     </div></li>
 
-    <li class="step"><div class="step-body">
-      <h3>Add the whole Hook Library to the Project knowledge</h3>
-      <p>Copy it below. In your Project, click <b>+</b> next to Project knowledge, choose <b>Add text content</b>, title it <b>Hook Library</b> and paste. 486 hooks sorted by the job they do, with a line on when to use each group, so Claude can match a hook to your video instead of guessing.</p>
-      <div class="box">
-        <div class="box-head"><b>THE HOOK LIBRARY · 486 HOOKS, SORTED BY JOB</b><button class="copy big" data-src="lib">Copy the whole Hook Library</button></div>
-        <div style="padding:12px 14px" class="chips"><span>How a hook works</span><span>Verbal hooks in 6 groups</span><span>Re-hooks</span><span>Title hooks</span><span>Title frameworks</span></div>
-        <details><summary>Preview what's inside</summary><pre id="lib-preview"></pre></details>
-      </div>
-      <p class="tip"><strong>Why knowledge and not instructions?</strong> The library is long. In the knowledge it's a reference Claude reads every time. The instructions stay short, so Claude follows them.</p>
+    <li class="step"><div class="glyph">📚</div><div class="body">
+      <h3>Drop the Hook Library into its <em class="s">knowledge</em></h3>
+      <p class="muted">In the Project: <b>+ → Add text content</b>, title it Hook Library, paste. 486 hooks sorted by the job they do, with a line on when to use each group.</p>
+      <div><button class="copy big" data-src="lib">✦ Copy the whole Hook Library</button></div>
+      <div style="padding:12px 14px" class="chips"><span>How a hook works</span><span>Verbal hooks in 6 groups</span><span>Re-hooks</span><span>Title hooks</span><span>Title frameworks</span></div>
+      <details><summary>THE HOOK LIBRARY · 486 HOOKS, SORTED BY JOB</summary><pre id="lib-preview"></pre></details>
+      <p class="tip">💡 <span><b>Why knowledge, not instructions?</b> It's long. In knowledge it's a reference Claude reads every time. The instructions stay short, so Claude follows them.</span></p>
     </div></li>
 
-    <li class="step"><div class="step-body">
-      <h3>Paste these Project instructions</h3>
-      <p>Click <b>Set project instructions</b> (or the pencil next to Instructions), paste this and save. This is how Claude picks hooks, plus the rules. The prompts in step 4 carry the output format.</p>
-      <div class="box">
-        <div class="box-head"><b>PROJECT INSTRUCTIONS</b><button class="copy" data-src="instr">Copy</button></div>
-        <pre id="instr">You are my short-form video coach. The "Hook Library" in this project's knowledge holds every hook I use, sorted by job: title hooks (text on screen), verbal hooks in six groups (the first sentence I say), and mid-sentence re-hooks.
+    <li class="step"><div class="glyph">🧭</div><div class="body">
+      <h3>Paste the <em class="s">instructions</em></h3>
+      <p class="muted"><b>Set project instructions</b>, paste, save. This is how Claude picks hooks: it reads your brain dump, decides what kind of video it is, and matches the hooks to it.</p>
+      <details><summary>Show the instructions</summary><div class="pbar"><button class="copy" data-src="instr">Copy</button></div><pre id="instr">You are my short-form video coach. The "Hook Library" in this project's knowledge holds every hook I use, sorted by job: title hooks (text on screen), verbal hooks in six groups (the first sentence I say), and mid-sentence re-hooks.
 
 I'll paste a prompt with a brain dump. Follow the prompt.
 
@@ -117,17 +168,17 @@ Rules that apply every time:
 - Every hook comes from the Hook Library. Keep the wording as written and only fill in the brackets or blanks with my topic. Don't write new hooks, and don't make up framing or phrases I didn't say.
 - Don't tell me which list a hook came from. Just give me the hook.
 - Don't invent results, numbers, clients or stories I didn't say. Keep my phrasing. If a line sounds like a coach wrote it, use mine instead.
-- Bullets I can glance at while filming, not a script.</pre>
-      </div>
+- Bullets I can glance at while filming, not a script.</pre></details>
     </div></li>
 
-    <li class="step"><div class="step-body">
-      <h3>Brain dump: one video or a week of them</h3>
-      <p>Pick one thing you keep explaining to clients, one thing you disagree with, or one thing that happened this week. Talk to your phone. Don't plan it. Get the transcript from a voice memo, a Loom, a TikTok draft or any transcription app.</p>
-      <p><b>One minute, one video.</b> Copy this prompt into a new Hook Coach chat, paste your transcript where it says, and send.</p>
-      <div class="box">
-        <div class="box-head"><b>ONE VIDEO PROMPT</b><button class="copy" data-src="one">Copy</button></div>
-        <pre id="one">Here's a 1-minute brain dump. Turn it into one short video using the hooks in the Hook Library.
+    <li class="step"><div class="glyph">🎙️</div><div class="body">
+      <h3>Brain dump: <em class="s">one video</em> or a week of them</h3>
+      <p class="muted">One thing you keep explaining to clients, one thing you disagree with, one thing that happened this week. Talk to your phone. Don't plan it. Grab the transcript from a voice memo, a Loom or a TikTok draft.</p>
+      <div class="mic" aria-hidden="true">
+        <svg viewBox="0 0 100 100"><g style="transform-origin:50% 50%"><circle class="wave w1" cx="50" cy="50" r="30"/><circle class="wave w2" cx="50" cy="50" r="30"/><circle class="wave w3" cx="50" cy="50" r="30"/></g><rect x="41" y="26" width="18" height="30" rx="9" fill="#b79cf5"/><path d="M34 50a16 16 0 0 0 32 0" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M50 66v9M42 75h16" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>
+        <div><p><b>1 minute</b> → one video</p><p class="or">or</p><p><b>5 minutes</b> → a week of videos</p></div>
+      </div>
+      <details><summary>🎯 One video prompt</summary><div class="pbar"><button class="copy" data-src="one">Copy</button></div><pre id="one">Here's a 1-minute brain dump. Turn it into one short video using the hooks in the Hook Library.
 
 Give me:
 1. Title hook: the text on screen. Pick one line from the title hook lists and fill in my topic (5 words max, one word in CAPS). It has to be something I actually said or clearly meant in the brain dump.
@@ -139,12 +190,8 @@ Give me:
 Under 10 bullets total.
 
 My brain dump:
-[paste transcript]</pre>
-      </div>
-      <p><b>Five minutes, a week of videos.</b> Copy this prompt into a new Hook Coach chat, paste your transcript where it says, and send.</p>
-      <div class="box">
-        <div class="box-head"><b>WEEK OF VIDEOS PROMPT</b><button class="copy" data-src="week">Copy</button></div>
-        <pre id="week">Here's a 5-minute brain dump. Find every separate video idea in it (max 5) and turn each into one short video using the hooks in the Hook Library.
+[paste transcript]</pre></details>
+      <details><summary>📅 Week of videos prompt</summary><div class="pbar"><button class="copy" data-src="week">Copy</button></div><pre id="week">Here's a 5-minute brain dump. Find every separate video idea in it (max 5) and turn each into one short video using the hooks in the Hook Library.
 
 For each video give me:
 1. Title hook: the text on screen. Pick one line from the title hook lists and fill in my topic (5 words max, one word in CAPS). It has to be something I actually said or clearly meant in the brain dump.
@@ -156,30 +203,25 @@ For each video give me:
 Then rank the videos in the order I should film them, with one line on why for each. Don't use the same hook twice in the week.
 
 My brain dump:
-[paste transcript]</pre>
-      </div>
+[paste transcript]</pre></details>
     </div></li>
 
-    <li class="step"><div class="step-body">
-      <h3>Film it the same day</h3>
-      <p>Put the title hook on screen, say the verbal hook, run the re-hook straight into beat 1 without pausing, glance at the beats, and post with the caption. Don't love a hook? Reply "give me 3 more from other lists" and pick again. Filming a week? Start with video 1 on the ranked list.</p>
+    <li class="step"><div class="glyph">🎬</div><div class="body">
+      <h3>Film it <em class="s">the same day</em></h3>
+      <p class="muted">Title hook on screen. Say the verbal hook, run the re-hook straight into beat 1, glance at the beats, post with the caption. Don't love a hook? Reply <b>"give me 3 more"</b> and pick again.</p>
     </div></li>
   </ol>
 </section>
 
-<section class="section">
-  <h2>Want more structure?</h2>
+<section>
+  <h2 style="margin-bottom:14px">Want more <em class="s">structure?</em></h2>
   <div class="res">
-    <a href="https://aefieldi.github.io/soulalignedshortform/" target="_blank" rel="noopener">
-      <b>Soul-Aligned Short-Form Script Studio ↗</b>
-      <span>Brain dump in, a fuller script out, for TikToks and Reels. Use it when you want more than bullets.</span>
-    </a>
-    <a href="https://aefieldi.github.io/hooks/" target="_blank" rel="noopener">
-      <b>The Hook Library ↗</b>
-      <span>The same hooks, searchable, every line tap-to-copy. Good for picking a hook by hand.</span>
-    </a>
+    <a href="https://aefieldi.github.io/soulalignedshortform/" target="_blank" rel="noopener"><i>📝</i><b>Short-Form Script Studio</b><span>Brain dump in, a fuller script out. For when you want more than bullets.</span></a>
+    <a href="https://aefieldi.github.io/hooks/" target="_blank" rel="noopener"><i>🪝</i><b>The Hook Library</b><span>Every hook, searchable, tap to copy. For picking by hand.</span></a>
   </div>
 </section>
+
+<p class="foot"><em>There's no one right way, there's only your way and consistency.</em><br>Patterns, not scripts. ✦</p>
 </div>
 
 <textarea class="hidden-src" id="lib" readonly aria-hidden="true" tabindex="-1">The Hook Library. Hooks are formats: keep the wording, fill the brackets and blanks with your topic. Three jobs: the title hook is the text on screen, the verbal hook is the first sentence out of your mouth, the re-hook comes 3 to 5 seconds in without a pause and runs into the first beat.
@@ -798,17 +840,16 @@ Built for long-form titles, and the same frameworks work for a reel title, a car
 (function(){
   var lib=document.getElementById('lib');
   document.getElementById('lib-preview').textContent=lib.value;
-  function text(id){var el=document.getElementById(id);return el.value!==undefined&&el.tagName==='TEXTAREA'?el.value:el.textContent;}
+  function text(id){var el=document.getElementById(id);return el.tagName==='TEXTAREA'?el.value:el.textContent;}
   function fallback(id){
-    var el=document.getElementById(id==='lib'?'lib-preview':id);
-    if(id==='lib'){el.closest('details').open=true;}
+    var el=document.getElementById(id==='lib'?'lib-preview':id); var d=el.closest('details'); if(d) d.open=true;
     var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);
   }
   document.querySelectorAll('button.copy').forEach(function(b){
     var label=b.textContent;
     b.addEventListener('click',function(){
       var id=b.getAttribute('data-src');
-      var done=function(){b.textContent='Copied';b.classList.add('done');setTimeout(function(){b.textContent=label;b.classList.remove('done')},1800)};
+      var done=function(){b.textContent='✓ Copied';b.classList.add('done');setTimeout(function(){b.textContent=label;b.classList.remove('done')},1800)};
       try{navigator.clipboard.writeText(text(id)).then(done,function(){fallback(id);b.textContent='Selected, press Copy';});}
       catch(e){fallback(id);b.textContent='Selected, press Copy';}
     });
