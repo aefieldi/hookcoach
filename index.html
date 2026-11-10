@@ -88,10 +88,10 @@ textarea.hidden-src{position:absolute;left:-9999px;width:1px;height:1px}
 
     <li class="step"><div class="step-body">
       <h3>Add the whole Hook Library to the Project knowledge</h3>
-      <p>Copy it below. In your Project, click <b>+</b> next to Project knowledge, choose <b>Add text content</b>, title it <b>Hook Library</b> and paste.</p>
+      <p>Copy it below. In your Project, click <b>+</b> next to Project knowledge, choose <b>Add text content</b>, title it <b>Hook Library</b> and paste. 486 hooks sorted by the job they do, with a line on when to use each group, so Claude can match a hook to your video instead of guessing.</p>
       <div class="box">
-        <div class="box-head"><b>THE HOOK LIBRARY · 242 HOOKS, FORMULAS AND RULES</b><button class="copy big" data-src="lib">Copy the whole Hook Library</button></div>
-        <div style="padding:12px 14px" class="chips"><span>How a hook works</span><span>Verbal hooks (the first sentence out of your mouth)</span><span>Mid-sentence re-hooks</span><span>Title hooks (the text on screen)</span><span>Title frameworks (built for YouTube, they work anywhere)</span></div>
+        <div class="box-head"><b>THE HOOK LIBRARY · 486 HOOKS, SORTED BY JOB</b><button class="copy big" data-src="lib">Copy the whole Hook Library</button></div>
+        <div style="padding:12px 14px" class="chips"><span>How a hook works</span><span>Verbal hooks in 6 groups</span><span>Re-hooks</span><span>Title hooks</span><span>Title frameworks</span></div>
         <details><summary>Preview what's inside</summary><pre id="lib-preview"></pre></details>
       </div>
       <p class="tip"><strong>Why knowledge and not instructions?</strong> The library is long. In the knowledge it's a reference Claude reads every time. The instructions stay short, so Claude follows them.</p>
@@ -99,16 +99,23 @@ textarea.hidden-src{position:absolute;left:-9999px;width:1px;height:1px}
 
     <li class="step"><div class="step-body">
       <h3>Paste these Project instructions</h3>
-      <p>Click <b>Set project instructions</b> (or the pencil next to Instructions), paste this and save. These are the rules. The prompts in step 4 carry the format.</p>
+      <p>Click <b>Set project instructions</b> (or the pencil next to Instructions), paste this and save. This is how Claude picks hooks, plus the rules. The prompts in step 4 carry the output format.</p>
       <div class="box">
         <div class="box-head"><b>PROJECT INSTRUCTIONS</b><button class="copy" data-src="instr">Copy</button></div>
-        <pre id="instr">You are my short-form video coach. The "Hook Library" in this project's knowledge holds every hook I use.
+        <pre id="instr">You are my short-form video coach. The "Hook Library" in this project's knowledge holds every hook I use, sorted by job: title hooks (text on screen), verbal hooks in six groups (the first sentence I say), and mid-sentence re-hooks.
 
 I'll paste a prompt with a brain dump. Follow the prompt.
 
+How to pick hooks, every time:
+1. Read the brain dump and decide what kind of video it is: Curiosity, Empathetic, Results & authority, Reflective, Question or Synopsis. Each group in the library says when to use it.
+2. Pick the verbal hook from that group. Fill the blanks with my point, not my story.
+3. Pick the title hook from a different angle than the verbal hook, so the eye and the ear get two different reasons to stay.
+4. Pick the re-hook from the re-hook list and finish it with a line from my brain dump, so it runs straight into the first beat.
+5. The caption is the third angle: my point from the viewer's side. It never repeats the title hook or the verbal hook.
+
 Rules that apply every time:
 - Every hook comes from the Hook Library. Keep the wording as written and only fill in the brackets or blanks with my topic. Don't write new hooks, and don't make up framing or phrases I didn't say.
-- Don't tell me which list or creator a hook came from. Just give me the hook.
+- Don't tell me which list a hook came from. Just give me the hook.
 - Don't invent results, numbers, clients or stories I didn't say. Keep my phrasing. If a line sounds like a coach wrote it, use mine instead.
 - Bullets I can glance at while filming, not a script.</pre>
       </div>
@@ -127,7 +134,7 @@ Give me:
 2. Verbal hook: the first sentence out of my mouth. Pick one line from the verbal hook lists and fill in my topic with my point, not my story. It says something different from the title hook.
 3. Re-hook: pick one from the mid-sentence re-hook list, word for word, and finish it with my words. It comes right after the verbal hook with no pause and leads straight into beat 1.
 4. 3 beats in my own words from the brain dump: a one-line name for each, then 2 to 3 bullets max under it. Beat 1 is where the re-hook lands. Keep my best lines word for word and cut the rest.
-5. A 2-line caption in my words.
+5. A 2-line caption in my words, punchy, that sums up the video from a different angle than the hooks: the point from the viewer's side, then what to do with it.
 
 Under 10 bullets total.
 
@@ -144,7 +151,7 @@ For each video give me:
 2. Verbal hook: the first sentence out of my mouth. Pick one line from the verbal hook lists and fill in my topic with my point, not my story. It says something different from the title hook.
 3. Re-hook: pick one from the mid-sentence re-hook list, word for word, and finish it with my words. It comes right after the verbal hook with no pause and leads straight into beat 1.
 4. 3 beats in my own words from the brain dump: a one-line name for each, then 2 to 3 bullets max under it. Beat 1 is where the re-hook lands.
-5. A 2-line caption in my words.
+5. A 2-line caption in my words, punchy, that sums up the video from a different angle than the hooks: the point from the viewer's side, then what to do with it.
 
 Then rank the videos in the order I should film them, with one line on why for each. Don't use the same hook twice in the week.
 
@@ -175,26 +182,26 @@ My brain dump:
 </section>
 </div>
 
-<textarea class="hidden-src" id="lib" readonly aria-hidden="true" tabindex="-1">The Hook Library. Hooks are formats: swap the brackets and blanks for your topic, keep the rest as written. Sources are named under each list.
-
----
+<textarea class="hidden-src" id="lib" readonly aria-hidden="true" tabindex="-1">The Hook Library. Hooks are formats: keep the wording, fill the brackets and blanks with your topic. Three jobs: the title hook is the text on screen, the verbal hook is the first sentence out of your mouth, the re-hook comes 3 to 5 seconds in without a pause and runs into the first beat.
 
 # The Hook Library
 
 ## Part 1. How a hook works
 
-**Five rules that sit under every list.**
+**Five rules.**
 
 1. Say something different from what&#x27;s on screen. The title hook is the text, the verbal hook is the first sentence out of your mouth. If they match, the viewer reads it, hears it, and leaves. Eye and ear each get a reason to stay.
 2. Title hook: under 5 words, one word in CAPS, an emoji if it fits. Top or middle of the frame so the caption doesn&#x27;t cover it. Dates and numbers create urgency.
-3. Re-hook at 3 to 5 seconds, without pausing. Mid-sentence, as if you forgot to finish the thought. It re-earns the attention the hook bought.
-4. Every hook triggers one of three feelings: curiosity (I need to know), fear (I don&#x27;t want to get this wrong), desire (I want that). The best ones hit two.
-5. The McDonald&#x27;s test. Someone who works at McDonald&#x27;s should understand your hook instantly. No jargon, no setup, no &quot;in this video I&#x27;m going to&quot;.
+3. Re-hook at 3 to 5 seconds, without pausing. Mid-sentence, as if you forgot to finish the thought. It re-earns the attention the hook bought and runs straight into the first beat.
+4. Every hook triggers one of three feelings. Curiosity (I need to know), fear (I don&#x27;t want to get this wrong), desire (I want that). The best ones hit two.
+5. Pass the stranger test. Someone with no idea what you do should understand the hook instantly. No jargon, no setup, no &quot;in this video I&#x27;m going to&quot;.
 
-**The ten principles behind every framework.**
+**Pairing.** Pick the verbal hook from the group that matches the video. Pick the title hook from a different angle, so the eye and the ear get two reasons to stay. The caption is the third angle: the point from the viewer&#x27;s side, never the hook again.
+
+**The ten principles behind every hook.**
 
 - Curiosity: an open loop they need closed (&quot;what happens to…&quot;, &quot;do X really…&quot;)
-- Desire: what they want (clients, money, freedom, being seen)
+- Desire: what they want: clients, money, freedom, being seen
 - Negativity: warnings and problems grab faster than benefits
 - Controversy: a counterintuitive or polarising take
 - Authority: a name, a credential, a number of clients
@@ -202,84 +209,191 @@ My brain dump:
 - Lists: &quot;4 leaks&quot;, &quot;5 signs&quot;, &quot;3 moves&quot; feel scannable
 - Constraint: &quot;the ONE thing&quot;, &quot;this ONE mistake&quot;
 - Contrast: &quot;not X, but Y&quot;, &quot;same gift, different income&quot;
-- Speed or ease: &quot;in 30 minutes&quot;, &quot;in one sitting&quot;, &quot;without posting daily&quot;
+- Speed / ease: &quot;in 30 minutes&quot;, &quot;in one sitting&quot;, &quot;without posting daily&quot;
 
-**Dial it to 11, then pull back one notch.** Start: &quot;Your tiers are priced wrong.&quot; Up: &quot;Why nobody upgrades in your community.&quot; Up: &quot;The #1 reason nobody upgrades.&quot; Up: &quot;This pricing mistake is killing your upgrades.&quot; Too far: &quot;Your pricing is a crime scene.&quot; Pull back one.
+**Dial it to 11, then pull back one notch.** Start: &quot;Your tiers are priced wrong&quot; Up: &quot;Why nobody upgrades in your community&quot; Up: &quot;The #1 reason nobody upgrades&quot; Up: &quot;This pricing mistake is killing your upgrades&quot; Too far: &quot;Your pricing is a crime scene&quot; → pull back one
 
-**Universalise, or narrow on purpose.** &quot;Five pricing myths every astrologer believes&quot; filters the audience; &quot;Five pricing myths&quot; is universal. Every word after the hook is a filter. Narrow only when the callout IS the strategy (a rising sign, a Human Design type), because the right person self-identifies hard.
+**Universalise, or narrow on purpose.** &quot;Five pricing myths every astrologer believes&quot; filters the audience; &quot;Five pricing myths&quot; is universal. Every word after the hook is a filter. Narrow only when the callout IS the strategy: &quot;Libra Rising&quot; and &quot;Projectors&quot; narrow on purpose, because the right person self-identifies hard.
 
 ## Part 2. Verbal hooks (the first sentence out of your mouth)
 
-Pick a pattern, say it in your words, never the same pattern two days in a row.
+Six groups. Read the brain dump, decide which kind of video it is, and pick from that group.
 
-### Educational (26)
-Source: the Fire Your Boss hook list.
+### Curiosity (91)
+Use when: The brain dump has a take people won&#x27;t expect, a story with a twist, or a rant. The viewer needs to know what happens next.
 
-- Let me show you my favorite way to [X].
-- If I had just [limited] minutes every day to work towards [core desire], here&#x27;s exactly what I&#x27;d do.
-- Here is a beginner-friendly way to [achieve core desire].
-- Here are more creative ways for you to [achieve core desire].
-- Things I had to unlearn in order to [achieve result].
-- It&#x27;s time to start talking about something a lot of you don&#x27;t want to talk about, and that&#x27;s [X].
-- The mindset behind a successful [niche role] vs. an unsuccessful one comes down to this…
-- If you are currently in the process of [niche journey], listen up, this video is for you.
-- Give me 1 minute and I&#x27;ll show you how to [X].
-- 5 [niche] hacks.
-- The biggest missing link with your [niche journey] is…
-- Is [strategy] a viable way to achieve [goal]? Let&#x27;s talk about it.
-- 3 [niche] strategies.
-- Here are 4 ways that you can [achieve X].
-- In case you didn&#x27;t know, [shocking niche fact].
-- This is probably why you&#x27;re unable to [X]…
-- One of the most important things to remember in regards to [niche] is…
-- Here is what to do if you [confusing scenario your audience runs into].
-- Ok, hear me out. [Uncommon or new strategy in your niche.]
-- Without these 3 things, I probably would&#x27;ve never been able to [achieve audience desire].
-- Here&#x27;s exactly what I&#x27;d do if I wanted to [achieve specific result].
-- If I wanted to achieve [desired result] in 1 month, here&#x27;s what I would do.
-- I&#x27;m going to give you the simplest way to achieve [result].
-- If you do X things, you&#x27;ll have Y result by Z time frame.
-- If you want [specific desire], do these few things.
-- [X] started [X] when… (my clients started booking from their reels when…)
-
-### Storytelling, relatable, inspirational (31)
-Source: the Fire Your Boss hook list.
-
-- Imagine having [X result] and now you get to [X]. Here&#x27;s how.
-- So I don&#x27;t think enough people know that you can actually get [X result] without doing [X].
-- I dare you to imagine what life would be like when [X] happens. Okay, now let me show you how easy it can be.
-- Your future [bank account / calendar / community] will thank you if you start doing this.
-- Here&#x27;s what no one else is going to tell you about [niche].
+- So I don&#x27;t think enough people know...
+- I dare you to…
+- Your future [niche descriptor; (skin, etc.)] will thank you if you start doing this today…
+- Let&#x27;s be real, [strategy you don&#x27;t recommend] is not doing you any favors. How about we switch things up?
+- Here&#x27;s what no one else is going to tell you about [niche]
+- Let&#x27;s switch up your [niche] strategy.
 - I&#x27;m never going to stop talking about…
-- Can I vent for a second?
-- They&#x27;ll tell you that [thing you disagree with] matters. When in reality, it&#x27;s all about [thing you stand by].
-- I wish someone had told me [this] before [doing this].
-- You want to know what… [rant]
-- Do you ever wonder what it would be like if you had just…
+- Can I vent for a second??
+- [Niche topic]. Where do I begin?
+- If I&#x27;m being honest…[rant]
+- They&#x27;ll tell you that [something you disagree within your niche] matters. When in reality, it&#x27;s all about [something you stand by within your niche].
+- Okay, imagine this…
+- There&#x27;s no way I&#x27;m going to let you keep [repeating harmful niche cycle].
+- Frankly, I&#x27;m tired of…
+- you cannot [achieve X], if you&#x27;re still doing [bad habit Y]
+- You want to know what…[rant]
+- Do you ever wonder what it would be like if you had just...
+- Do you [achieve goal] faster by doing [X] or [Y]?
+- Fun fact about [niche] is that [fun fact].
+- So why do we do [X thing]?
+- If you&#x27;ve ever wondered why [niche phenomenon] happens, let&#x27;s talk about it. I&#x27;m a [your title]…
+- You&#x27;re getting [X] all wrong..
+- You thought [inferior thing] was cool? Wait until you see [superior thing]?
+- [Niche phenomenon] is not as simple as it seems.
 - Did you know that you could…
 - I don&#x27;t know who needs to hear this but…
-- So, what is the difference between [X] and [Y]?
-- The most common misconception when it comes to [niche] is…
+- So, what is the difference between ______ and ______?
+- A lot of y&#x27;all are going to hate me for this but…
+- The most common misconception when it comes to [niche] is….
+- Let&#x27;s see how fast I can [do something that shows your niche skills]
 - I don&#x27;t think you understand the importance of [key niche strategy].
-- I&#x27;m finally starting to realize that [realization]…
+- I&#x27;m finally starting to realize that [realization or awakening]…
+- I don&#x27;t think anyone knows how much I [love/hate] X
+- When I learned how to do this one thing, I [achieved X]
+- So many people don&#x27;t realize that they&#x27;re only a couple months away from…
+- To everyone who said they were gonna [do X] this year, and then didn&#x27;t. Just know that [describe audience&#x27;s dream reality that is happening now].
+- So I changed my whole damn life in [duration]. I just [describe the changes you made in a simple way].
+- Unpopular opinion, but…
+- Do you ever just think about…
+- Prepare to have your mind&#x27;s blown with [a new or shocking item].
+- Hopefully you&#x27;re seeing this video before [date], because we&#x27;re about to dive into everything you need to know about [upcoming timely event].
+- Most people don&#x27;t realize that…
+- Do you want the bad news or good news first?
 - I have a confession to make…
-- Hate to break it to you but…
-- Are you interested in learning [X]?
+- Hate to break it to you but...
+- Are you interested in learning ______?
 - What&#x27;s wrong with [something you disagree with in your industry]? I&#x27;ll tell you.
-- I want you to think about this [perspective change].
-- Why does no one talk about…
-- [X] won&#x27;t help you [achieve Y]… instead it will…
+- I want you to think about this [perspective change]
+- Please tell me you&#x27;re not still [doing outdated or harmful thing]?
+- Why does no one talk about..
+- There is nothing more irritating (or other word) than...
+- You need to stop doing [bad habit] as soon as possible.
+- It irks me so much that...
+- &quot;X won&#x27;t help you [achieve Y]&quot;…instead it will…
 - If you&#x27;ve ever wondered how [niche phenomenon] works, let&#x27;s talk about it. I&#x27;m a [your title]…
+- [Niche phenomenon] is probably different than what you thought it was.
+- I hate to be the bearer of bad news, but…
 - Have you ever wondered…
+- Have you ever wondered why ______ happens? It&#x27;s because [explanation]. And I&#x27;m gonna teach it to you.
 - More people need to know about…
-- [X] will always beat out [Y]. (A content strategy will always beat posting and praying.)
+- _____ will always beat out ______.
+- If you&#x27;re into [topic], I….
+- &quot;So, you want to start [niche] but you&#x27;re too caught up in [distraction].&quot;
+- I&#x27;m just gonna get straight to the point here…
 - You should not watch this video unless you care about…
-- Is anyone else annoyed at [harmful myth or belief in your niche]?
-- Put down whatever you&#x27;re doing and let this sink in: [mic drop wisdom].
+- Is anyone else annoyed at [harmful myth, belief, or thing in your niche]?
+- Put down whatever you&#x27;re doing and let this sink in [mic drop wisdom].
+- I can&#x27;t stand around and watch you keep on [doing bad habit]…
+- You don&#x27;t need [outdated, unhelpful thing]…you need [modern, helpful] thing.
+- In case you forgot…
+- I cannot stress enough that [X] is so much more important than [Y] on your [niche] journey.
+- Have you ever heard of _______?
+- If you&#x27;re not [favorite niche tip], what are you doing?
+- Let&#x27;s rank some of the worst [niche] advice I&#x27;ve ever heard
+- Controversial [niche] advice that [produced result]
+- Everybody I know who is [aspirational result] has this one thing in common. They _______.
+- Being [niche] is not about [3 myths], here&#x27;s what it&#x27;s really about.
+- This secret has never been shown on TikTok and I&#x27;m about to share it with you.
+- If you&#x27;ve ever looked for a time to take your [niche] journey seriously, this is the time.
+- I don&#x27;t care how many views this video gets so long as it reaches the right person.
+- This is gonna piss a lot of [audience] off, but…
+- Do not [do X] until you watch this…
+- Since no one else is gonna say it, I&#x27;m gonna say it – [call out your audience / drop a mind-blowing fact].
+- Don&#x27;t tell anyone I told you this but [insider info or something that&#x27;s normally gatekept]…
+- This might be a crazy theory, but…
+- I dare you to imagine what life would be like when [X] happens. Okay, now let me show you how easy it can be.
+- Nobody is talking about this [vehicle] strategy.
+- This is why your [vehicle] isn&#x27;t working.
+- There&#x27;s one tiny hack that creates exponential results.
+- I just found the best [technique] hack.
+- [Vehicle] hack that you didn&#x27;t know about.
 
-### Authority (21)
-Source: the Fire Your Boss hook list.
+### Empathetic (34)
+Use when: They&#x27;re talking to someone stuck in a specific problem. The viewer should feel seen in the first sentence.
 
+- There&#x27;s no need to [bad habit your audience does]
+- I hate seeing people stuck in [bad point A position] when getting to [ideal position] is pretty simple.
+- If you haven&#x27;t [achieved goal] in [unnecessarily long period of time], watch this video.
+- I have a PSA for the [audience identity] out there…
+- If you&#x27;re stuck in the loop of [common mistake], let&#x27;s talk about why this doesn&#x27;t work &amp; what you actually need to do to [reach goal].
+- I know how it feels to [common niche struggle]. I also know how it feels to [reach desired result].
+- If you want [desire] but are stuck doing [bad habits], here&#x27;s what worked for me.
+- This one&#x27;s for the [audience identity] who want [desires].
+- I truly used to feel so [pain point].
+- Have you ever felt [common audience struggle]? Here&#x27;s why.
+- So you&#x27;re stuck in the ____ cycle again, huh? Let&#x27;s get you out of there.
+- There&#x27;s really no reason to be stuck in [shitty situation]…
+- You know that you&#x27;re allowed to feel [feeling], right?
+- For all the lazy, busy, or unbothered people, I have some [niche] wisdom to share.
+- If you&#x27;re [describe ideal audience], keep watching this. If you&#x27;re a [describe non-ideal audience] keep scrolling.
+- Instead of you [doing X] why don&#x27;t you [do Y]?
+- If you&#x27;re not using [tool] to [achieve dream], you&#x27;re [pain point].
+- If you&#x27;ve been struggling with [common niche pain point], here&#x27;s what to do from someone who&#x27;s been there.
+- Picture this, [describe audience&#x27;s dream]
+- Here&#x27;s how to get out of the [pain point] loop.
+- You&#x27;re never going to be a successful [identity keyword] if you don&#x27;t...
+- This one&#x27;s for the [audience identity] who REFUSE TO live in [pain points].
+- If you constantly find yourself [repeating/doing X], here&#x27;s something that can help.
+- [Audience], if you&#x27;re feeling [pain point], this one&#x27;s for you.
+- Ugh, why isn&#x27;t _____ working? Is _____ even possible? If this sounds like you, hi, I&#x27;m a [niche title] and I can help.
+- This is for someone who&#x27;s over the whole [common niche myth], but wants to [achieve X]…
+- The first step to [solving problem] is…
+- If you want to learn to ______, first you must [change to be made].
+- I used to feel so [vulnerable emotion] until I…
+- If you are just like me and you like [relatable, niche interest]…
+- Here&#x27;s how I cheated my way to [achieved dream] in just [short timeframe].
+- So you&#x27;re in your [age range] and you feel like you&#x27;re behind with topic…
+- Here are a few tips for [audience] who are [embarking on X journey] for the first time.
+- I was able to go from X to Y by switching one thing in my [niche].
+
+### Results &amp; authority (54)
+Use when: They mention a number, a before and after, a client outcome, or years of doing this. Use these to sell an offer and build authority.
+
+- I see you&#x27;ve already [accomplished X result]. Now lets [go further].
+- This is the best chance you have to finally [achieve X or overcome Y].
+- When I realized that [key realization], I was finally able to [achieve desire]…
+- Here&#x27;s exactly what I&#x27;d do if I wanted to [achieve specific result].
+- If I wanted to achieve [desired result] in 1 month, here&#x27;s what i would do.
+- I&#x27;m going to give you the simplest way to achieve [result].
+- If you do X things, you&#x27;ll have Y result by Z time frame.
+- If you want to [specific desire], do these few things.
+- If you want to be ahead of the [niche] curve, start doing these X things…
+- Day X of helping you [achieve niche result] – trending sound with text on screen
+- Avoid doing these things if you want to [solve pain points].
+- This is the overall timeline for someone who&#x27;s [audience&#x27;s current position] but wants to [achieve niche result].
+- Here are some realistic ways for you to ______.
+- Here&#x27;s what i did to [achieve goal] and [feel feeling]…
+- This is what you should and shouldn&#x27;t do if you&#x27;re trying to __________.
+- Alright if you need to ______ quickly and you&#x27;re serious about it, favorite this video so you can come back to it. This is going to change everything for you.
+- A lot of people are asking how I&#x27;m able to do [aspirational thing].
+- As a [state your expertise], here&#x27;s one piece of advice to [improve X], it would be this.
+- I don&#x27;t know about you but I plan on [achieving X] by [doing Y] this year.
+- You wouldn&#x27;t believe these quick hacks that can [achieve niche result].
+- Here are the real things that helped me to [achieve result].
+- I promise if you start doing this, you will be the [desired result].
+- How different would your life look if you actually, had [niche result].
+- If you want a difficult but sustainable way to [achieve result], this one&#x27;s for you.
+- Showcase a client win &amp; use them as an exemplar for a particular strategy.
+- Here is the exact formula used to [achieve X].
+- If you&#x27;re tired of the same old stuff, here&#x27;s a new way to [achieve/get X].
+- Do NOT do this if you want [X result].
+- Hey, I&#x27;m [introduce your mission and/or qualifications]. If you want to [achieve thing]…Let&#x27;s talk.
+- Want to hear the real thing that&#x27;ll get you [desired result]?
+- There&#x27;s no way I&#x27;m gonna let you go another year without [achieving core desire].
+- The difference between [lower level of success] versus [higher level of success] is…
+- If you want to [achieve result] in [timeframe] you need to be doing these X things every single day.
+- This is your sign to start ________. It&#x27;s been [duration] and I&#x27;ve already [achieved dream result].
+- Maybe [topic] is easy and you just need to [get rid of X habit or vice].
+- In just X months you can [achieve Y], but only if you stop [vice or bad habit].
+- So X years ago I went from [previous shitty reality] to [current dream reality].
+- [X] started [X] when… (my clients started booking from their reels when…)
+- Imagine having [X result] and now you get to [X]. Here&#x27;s how.
 - I&#x27;ve been using this to [achieve result] myself. And I&#x27;ve helped [client] [achieve result].
 - If you think it&#x27;s gonna take you years to get [X result], think again. I&#x27;m going to teach you how in as little as [X time], just like my client did.
 - After working with over [number] clients solving [X problem], I need you to know this is the #1 thing that is overlooked.
@@ -291,59 +405,227 @@ Source: the Fire Your Boss hook list.
 - This is exactly how I solved [X problem].
 - This is my go-to strategy for doing [X].
 - My client got [X result] without doing [the 3 things your audience thinks it takes].
-- Here&#x27;s a [niche] tip that completely changed my life. And I hope it does the same for you.
 - If I had to start all over as [X], this is the first thing I would do.
-- Okay, I&#x27;m gonna tell you how I managed to get [outcome].
 - I tell all of my clients to [X] if they want [X].
 - How I achieved [X] by stopping [X].
-- I&#x27;m [your name] and I wanna talk about…
 - Something I do every [day / week / month] that helps me [X] is [X].
-- If I could follow just ONE [niche] rule it would be…
-- Let&#x27;s dive into the science of how I get you [X result].
-- [X] started [X] when… (my clients started making sales from their reels when…)
 
-### Rachel Pedersen&#x27;s 20 viral info hooks
-Source: Rachel Pedersen, from 937 viral info TikToks.
+### Reflective (44)
+Use when: They&#x27;re telling what they&#x27;d tell their past self, or what they learned the hard way.
 
-- The best [technique] I&#x27;ve ever done.
+- I wish I could go back and tell my [previous age] self this.
+- Years ago I [story]
+- This is the story of...
+- Here&#x27;s what I would do if I started my [niche journey] from scratch.
+- X pieces of advice I&#x27;d give my former [Point A] self.
+- Something i really wish i knew when i started [niche journey]...
+- Back then i wish i&#x27;d known..
+- With X years of experience in [niche], here&#x27;s what I&#x27;ve learned.
+- Ugh, i know i can&#x27;t go back...but let me tell you – if i could...
+- Here are 3 things I would never, ever do again as someone trying to…
+- I&#x27;ve been exactly where you are. [List relatable struggles]. I also spent WAY too long in that place. So, I want to talk about a few things you can do differently.
+- I love seeing more people trying to ______, so here&#x27;s my two sense as someone who has been doing this for X years.
+- Okay, I&#x27;m X years old. Here&#x27;s everything I wish I knew about ______ when I was [X age].
+- I&#x27;ve been reflecting on my [niche] journey and I have X things I want to share for anyone else on a similar road.
+- What I wish I knew as a [niche] beginner
+- Things I&#x27;ve learned now that I&#x27;m a…
+- [Niche] advice that I would tell [X-year old] me.
+- Old me did not want to believe that [niche goal or struggle] was as simple as [surprisingly helpful tip].
+- Honestly, if I could restart [niche] knowing what I know now, the last thing I would do is focus on [3 strategies]. Instead I would, [topic of video].
+- X hard to hear things that would&#x27;ve revolutionized my _______.
+- I wish someone had told me in my [previous age range (20s)], [your name], ________
+- I was about to [settle for X] before I found [better route].
+- If I knew this before starting [niche journey], I would&#x27;ve been [achievement] way faster.
+- X things I wish I knew before I started…
+- Life&#x27;s been better ever since…
+- In hindsight I...
+- You know, if i could start all this [niche stuff] from scratch, I&#x27;d...
+- Knowing what I know now, here&#x27;s what I would do differently in my [niche] journey.
+- As someone who&#x27;s already achieved [dream], here&#x27;s how I&#x27;d get there faster.
+- I would scream this at my younger self if I could…
+- In my X years of doing [niche]…
+- If you&#x27;re not trying waste any more time on your [niche journey], here&#x27;s some advice from someone who did.
+- If I had a time machine, here&#x27;s what I&#x27;d tell my former [niche] self.
+- It&#x27;s not about [common myth or mishap], it&#x27;s about [actual solution]
+- Looking back, we do so many unnecessary things when trying to [achieve X]. As someone who&#x27;s already overcome [pain] here&#x27;s some life-changing wisdom need.
+- This is what I wish someone told me…
+- I feel like it would be a crime if I didn&#x27;t show you…
+- Don&#x27;t [do X] until you watch this.
+- Every time I think about how much time I wasted on [unhelpful niche practice], I force myself to make a video to make sure you don&#x27;t make the same mistakes I did.
+- If you ever wanted to start X, here&#x27;s everything I&#x27;d do if I started from scratch.
+- I&#x27;m about to talk about something that I don&#x27;t know if I want to talk about but, [share tough story or life event].
 - 10 [tool types] I wish I knew earlier.
-- You need this free tool for [vehicle].
 - I wish I knew about this [vehicle] tip sooner.
+- I decided to take my [vehicle] seriously 2 months ago.
+
+### Question (30)
+Use when: The dump opens with, or answers, a question their audience actually asks.
+
+- What if I told you that [surprising fact]?
+- Do you want [desire] but can&#x27;t seem to shake [bad habit]?
+- Are you really ok with staying [describe undesirable current reality] for another year?
+- I ask my new clients this question every time: [thought provoking niche question]
+- Are you constantly [vicious niche cycle]?
+- Are you seriously planning on staying [describe your stuck audience member] forever?
+- What would I tell myself to achieve [desire] faster?
+- The most common question I get asked as a [introduce yourself and niche] is…
+- Care for some wisdom from a [describe your authority] who used to [describe past struggles]?
+- Between you and me, are you ever afraid that you won&#x27;t [achieve niche goal]?
+- Not sure how to [do niche thing]? Do this…
+- Have you heard of the [theory or thing]?
+- Guess what the longest study on [topic] found?
+- Remember when we said we were going to [habit your audience is probably procrastinating]?
+- Am I the only one who [relatable habit, practice, or belief]?
+- Would you believe me if I said [surprising fact]?
+- You don&#x27;t really want [desire], do you?
+- Have you ever asked yourself: &quot;How do I [do niche thing]?&quot;
+- Do you feel like [niche] shouldn&#x27;t be this hard?
+- Is [niche experience] way harder than you expected?
+- When you started [niche journey], what did you expect? I expected [your expectation], but I got [initial undesirable reality].
+- Do you feel like you might never [achieve desire]? If so, let me introduce myself.
+- Can you please stop [bad niche habit]?
+- Do you need some extra help on your [niche] journey?
+- How many more days do you really want to [core audience struggle]?
+- [Audience], have you ever tried [niche strategy]?
+- Are you under [age] and feel like you&#x27;re running out of time to [do or achieve X]?
+- Is it just me or has anyone else noticed that [shocking discovery]?
+- I bet you didn&#x27;t know this. Ever heard of [shocking info]?
+- Want to know how to do the [technique]?
+
+### Synopsis (127)
+Use when: A straight teaching video. Here are three things, here&#x27;s how I do it, here&#x27;s the mistake.
+
+- Odd but effective ways to…
+- I&#x27;m back with another…
+- Let me show you my favorite way to X.
+- If i had just [limited] minutes everyday to work towards [achieving core desire] here&#x27;s exactly what I&#x27;d do.
+- Here is a beginner-friendly way to [achieve core desire].
+- Here are more creative ways for you to [achieve core desire].
+- As a [introduce self], I cannot live without this [item, habit, thing]…
+- The easiest &amp; most accessible way to get started with [niche].
+- 10 ways to be a better _______.
+- Here are a couple [niche] things to keep in mind
+- I have something to share about [niche] that I&#x27;ve been meaning to talk about..
+- Here&#x27;s a much better alternative to [common item/practice/thing in your niche]…
+- 3 mindset shifts
+- Let&#x27;s talk about…[hot take in your industry].
+- So this is going to be a X second video of me convincing you to [do X thing].
+- Things you thought was your X but is actually your Y.
+- One big misconception about [blank] is [misconception]. now follow up with an explanation.
+- Something that&#x27;s been on my mind lately is...
+- Here is a [niche] starter pack…
+- So you&#x27;re ready, to take [niche journey] seriously. Here&#x27;s what you&#x27;re going to do.
+- Here is a [practice] that every [audience identity] should be doing!!
+- Let&#x27;s create a daily [niche] routine for you.
+- Here&#x27;s a quote that every [describe your audience] needs to hear.
+- Okay, I&#x27;m gonna tell you how I managed to get [outcome].
+- Here is the easiest way to…
+- This is probably why you&#x27;re unable to…
+- Remember when I talked about [past topic]? Well now we&#x27;re gonna talking about [new, related topic].
+- If you&#x27;re curious about ______, let&#x27;s talk.
+- Here is [this month&#x27;s] [niche] routine!
+- Something I do every month that helps me _______ is ______.
+- This is a less known but very harmful myth in the [niche] industry.
+- Busting X [niche] myths!
+- One of the most important things to remember in regards to [niche] is…
+- This is your reminder to…
+- I genuinely think that [rant about something].
+- [Items/Habits/Things] I would never use.
+- Here&#x27;s what to do if you [describe a confusing scenario that your ideal audience probably runs into frequently]…
+- Between the ages of [age range]? Here&#x27;s what you should be doing to get [desired goal] by [upcoming age range].
+- Ok, hear me out. [Present an uncommon or new strategy in your niche]
+- The worst possible thing you can do as an aspiring ______ is to…
+- Without these 3 things, I probably would&#x27;ve never been able to [achieve audience desire].
+- This is the [thing] that helped [person] to [achieve win], [against odds]…
+- I&#x27;ve been [doing activity] for [duration] and here&#x27;s what I&#x27;ve learned.
+- I designed you a [niche] [routine, schedule, plan] that&#x27;s going to help you [achieve result] without [pain point or objection].
+- I&#x27;m gonna show you the [document or item] that got me [big result] within [time frame].
+- X of the worst [habits or actions]
+- These are 5 [niche] rules I live by as a [describe authority].
+- I literally don&#x27;t want to hear any excuses as to why you haven&#x27;t started [task, project] after watching this video.
+- Welcome to [topic] 101.
+- I wish someone would&#x27;ve explained [topic] to me like this.
+- The worst thing you can do as a [describe audience] who is trying to [achieve result] is to…
+- X common misconceptions about [topic]
+- For the last time I&#x27;m gonna tell you, [rant].
+- Here&#x27;s the dummy&#x27;s guide for [topic].
+- Here&#x27;s what you need to do to prepare for [upcoming timely event].
+- If you&#x27;re watching this before [specific date(s)], right now you have to [do thing].
+- 3 [niche] strategies
+- This is how I [audience desire] without [common pain point or objection].
+- If I could follow just ONE [niche] rule it would be...
+- Simple advice for someone that wants [X] but doesn&#x27;t know how to get it.
+- Things I had to unlearn in order to [achieve result]
+- In a nutshell, here&#x27;s how you get [X] even if you only have [Y]
+- This is the easiest way for you to…
+- It&#x27;s time to start talking about something that a lot of you don&#x27;t want to talk about...and that&#x27;s [X].
+- Here&#x27;s a [insert your niche] tip that completely changed my life. And I hope it does the same for you.
+- The mindset behind a successful [niche keyword like entrepreneur or personal trainer] vs. an unsuccessful one comes down to this…
+- If you are currently in the process of [niche journey], listen up this video is for you.
+- Give me 1 minute and i&#x27;ll show you how to..
+- 5 [niche] hacks.
+- The biggest missing link with your [niche journey] is.
+- Is [strategy] a viable way to achieve [goal]? Let&#x27;s talk about it.
+- Something to keep in mind is
+- [things] that changed my mindset
+- Here are 4 ways that you can [achieve X].
+- In case you didn&#x27;t know, [shocking niche fact].
+- I&#x27;m [your title or name] and I wanna talk about…
+- Let&#x27;s dive into the science of [niche].
+- Here is an in-depth tutorial for…
+- My favorite [niche] practice is…
+- _____ you should know, part X.
+- [niche] facts you didn&#x27;t know about, part X.
+- This might just be the best advice on [niche] that I&#x27;ve ever heard…
+- Here is the most common mistake people make when it comes to _______.
+- This is day one of realistic [niche] tips that you can start today.
+- As someone who&#x27;s into [niche keyword] I cannot live without [resource]…
+- This might be why your _______ aren&#x27;t doing so well.
+- According to [authority figure], [surprising or helpful fact].
+- I&#x27;m going to tell you guys the [pick a number 1-10] habits that I do everyday that helped me to [achieve things].
+- Here&#x27;s how I [achieved X] by myself. Without [common routes your audience takes]…
+- You&#x27;re really still using [outdated thing in your niche]? Let me put you onto [much better alternative].
+- This is exactly how I ________.
+- What I do vs. what I don&#x27;t do as a [describe success in your niche].
+- If you start doing this 1 thing today, you&#x27;ll get [result] by [future timeline].
+- How much I made today as a [describe position].
+- So I hear you want [core audience desire]…
+- Let me save you $[X] by showing you how to [do niche thing] yourself.
+- Everyone&#x27;s talking about X, but no one is talking about Y
+- The information about [topic] is so [confusing, misleading, difficult to understand, etc]…
+- I spent X hours researching _________ and this is what I learned.
+- So you want to do [thing] but you don&#x27;t want to spend any money up-front. Let me show you how you can do it for free using [alternative tool].
+- You&#x27;d be surprised how easy it is to [achieve X] with [tool].
+- I tried [trendy tool] for X days and here&#x27;s what happened.
+- This is [result I achieved] in [duration] as a [describe job or life situation].
+- Steal this [niche information or strategy] from me!
+- [Specific date(s)] are a [adjective] time for you to [do X].
+- This will take about X minutes and it will completely change the way you view [topic].
+- Welcome to the series where I show you how to…
+- Here&#x27;s why you should start X in [current year].
+- If I had $X to spend on [niche], I would get…
+- If I could do just one [niche thing] for the rest of my life, what would it be?
+- If I had just [limited] minutes every day to work towards [core desire], here&#x27;s exactly what I&#x27;d do.
+- Here is what to do if you [confusing scenario your audience runs into].
+- If you want [specific desire], do these few things.
+- The best [technique] I&#x27;ve ever done.
+- You need this free tool for [vehicle].
 - Top 5 sites I use to save time as a [niche].
-- Nobody is talking about this [vehicle] strategy.
-- This is why your [vehicle] isn&#x27;t working.
-- There&#x27;s one tiny hack that creates exponential results.
 - 4 free sites to create great [tool types].
 - Simple way to do [vehicle] for free.
-- Want to know how to do the [technique]?
 - How to grow your [vehicle] organically.
 - 5 things you can do right now to improve [vehicle].
-- This is your sign to start taking your [vehicle] seriously.
 - How to grow your [vehicle].
 - Here are 10 ideas you can use for [vehicle].
-- I just found the best [technique] hack.
-- [Vehicle] hack that you didn&#x27;t know about.
-- I decided to take my [vehicle] seriously 2 months ago.
 - 3 apps every [niche] uses.
-
-### The &quot;first 5&quot; format
-Source: Shannon McKinstrie&#x27;s reel, examples as written. The first line is the format.
-
 - The first 5 things I&#x27;d [do / change / teach] if you [situation]
 - The first 5 things I&#x27;d change in your builder-grade kitchen if you&#x27;d let me
 - The first 5 Sephora products I&#x27;d add to your cart if you only have five minutes to get ready
 - The 5 lunches I&#x27;d add to your weekly rotation if you wanted to lose 15 lbs by Thanksgiving
-- The first five neighborhoods in Raleigh I&#x27;d take you if you were thinking of relocating here
-- The first five things I&#x27;d teach you if you were brand-new to golf
-- The first 5 things I&#x27;d teach your dog if you just brought home a new puppy
-- The first 5 things I&#x27;d have you try from our fall menu if you love sweet treats
-- The first five books I&#x27;d recommend to your tween if they say they hate reading
-- The first 5 things I&#x27;d take off your plate if you hired me as your VA
-- The first five investments I&#x27;d have you make if you were starting with $500
 
 ## Part 3. Mid-sentence re-hooks
 
-Say one of these 3 to 5 seconds in, without pausing, as if you forgot to finish the thought. Fill the blanks with that day&#x27;s topic. Source: Shannon McKinstrie&#x27;s &quot;10 mid-sentence hooks to start your talk-to-camera videos&quot;, word for word.
+Say one of these 3 to 5 seconds in, without pausing, as if you forgot to finish the thought. Finish the sentence with a line from the brain dump so it lands in beat 1.
 
 - …just kidding, I&#x27;m not done because the thing is…
 - …yes I know it sounds crazy but…
@@ -366,8 +648,7 @@ Say one of these 3 to 5 seconds in, without pausing, as if you forgot to finish 
 4. Top or middle of the frame. The caption covers the bottom.
 5. Emojis and dates help. &quot;Do this before 11/11&quot; outperforms &quot;Do this&quot;.
 
-### Formulas that work for spiritual business
-Each line is the formula, then an example after the colon.
+### Formulas (formula, then an example after the colon)
 
 - [Callout] [emoji] + the gap: &#x27;Libra Rising ♎️ the missing piece&#x27;
 - [Thing] is a SYMPTOM / isn&#x27;t [what they think]: &#x27;Clarity is a SYMPTOM&#x27;, &#x27;Winging it isn&#x27;t INTUITION&#x27;
@@ -382,8 +663,7 @@ Each line is the formula, then an example after the colon.
 - Two short sentences: &#x27;Buy the lamp. Raise the price.&#x27;
 - Same [X]. Different [Y].: &#x27;Same gift. Totally different INCOME.&#x27;
 
-### Manifestation, mindset, spiritual title hooks (30)
-Source: the viral title hooks swipe file.
+### Ready-made title hooks (30)
 
 - Manifest Wealth INSTANTLY
 - Your Energy = Your Bank
@@ -416,23 +696,21 @@ Source: the viral title hooks swipe file.
 - The Secret Nobody Talks About
 - I Stopped Doing THIS &amp; Everything Changed
 
-## Part 5. Title frameworks (built for YouTube, they work anywhere)
+## Part 5. Title frameworks
 
-These came from YouTube titles, and the same frameworks work for a reel title, a carousel cover, a post headline or an ad. Match the piece to the framework that amplifies it, generate ten, keep the strongest three, then pair each with a thumbnail that says something else.
+Built for long-form titles, and the same frameworks work for a reel title, a carousel cover, a post headline or an ad. Match the piece to the framework that amplifies it, generate ten, keep the strongest three.
 
 **Seven rules.**
 
 1. Front-load the search keyword in the first 3 to 5 words.
-2. 7 to 11 words, under 55 characters. Mobile truncates after that, and 70% of views are mobile.
+2. 7 to 11 words, under 55 characters. Mobile truncates after that.
 3. Use the exact phrase they&#x27;d type at 11pm when they&#x27;re stuck.
 4. One power word per title. Capitalise at most one word.
 5. A bracket adds a second promise: (Step by Step), (Without Burnout), (For Readers).
 6. Label each title Search (they typed it) or Browse (they scrolled into it). Make some of each.
-7. No year unless it&#x27;s genuinely time-sensitive. Evergreen compounds. No clickbait, no em dashes, no salesy words.
+7. No year unless it&#x27;s genuinely time-sensitive. No clickbait, no salesy words.
 
-**Title and thumbnail never say the same thing.** Title &quot;Five pricing myths&quot; with thumbnail &quot;Five pricing myths&quot; repeats. Title &quot;Five pricing myths&quot; with thumbnail &quot;You&#x27;re doing it wrong&quot; complements. Title asks, thumbnail hints. Title promises, thumbnail adds urgency. Title states the problem, thumbnail shows the feeling.
-
-Sources: the viral-youtube-titles formula library, Creator Hooks (Jake Thomas) frameworks ranked by hook score, Andrew Muto&#x27;s universalise, dial-to-11 and McDonald&#x27;s test.
+**Title and thumbnail never say the same thing.** Repeats: Title: &quot;Five pricing myths&quot; · Thumb: &quot;Five pricing myths&quot;. Complements: Title: &quot;Five pricing myths&quot; · Thumb: &quot;You&#x27;re doing it wrong&quot;. Title asks, thumbnail hints. Title promises, thumbnail adds urgency. Title states the problem, thumbnail shows the feeling.
 
 ### Outcome-based (desire)
 
@@ -502,7 +780,7 @@ Sources: the viral-youtube-titles formula library, Creator Hooks (Jake Thomas) f
 - The Ugly Truth About [niche thing] Nobody Wants to Hear
 - This [simple thing] Will [transform outcome] (Most [niche people] Miss It)
 
-### Creator Hooks top performers (highest hook scores)
+### Proven top performers
 
 - I tested [X] vs [Y]. Here&#x27;s what won.
 - Getting [addicted to / obsessed with] [X] is easy. (contradiction)
@@ -514,7 +792,6 @@ Sources: the viral-youtube-titles formula library, Creator Hooks (Jake Thomas) f
 - 5 [X] habits that [Y]
 - I went to all [X]. Here are my rankings.
 - From [screw-up] to [legend]: [the turning point]
-
 </textarea>
 
 <script>
